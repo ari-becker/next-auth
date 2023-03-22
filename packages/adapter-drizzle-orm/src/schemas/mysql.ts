@@ -96,7 +96,9 @@ export function DrizzleMySqlAdapter(db: MySqlDatabase<any, any>, idGenerator = c
             if (result.length > 0) return result[0]
             else return null
         },
-        updateUser: ({id, ...data}) => p.user.update({where: {id}, data}),
+        async updateUser ({id, ...data}) {
+            const result = await db.update(users).set(data).where(eq(users.id, id)).execute()
+        },
         deleteUser: (id) => p.user.delete({where: {id}}),
         linkAccount: (data) =>
             p.account.create({data}) as unknown as AdapterAccount,
