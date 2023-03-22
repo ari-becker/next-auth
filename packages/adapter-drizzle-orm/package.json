@@ -1,0 +1,55 @@
+{
+  "name": "@next-auth/drizzle-orm-adapter",
+  "version": "0.1.0",
+  "description": "Drizzle ORM adapter for next-auth.",
+  "homepage": "https://authjs.dev",
+  "repository": "https://github.com/nextauthjs/next-auth",
+  "bugs": {
+    "url": "https://github.com/nextauthjs/next-auth/issues"
+  },
+  "author": "Ari Becker",
+  "main": "dist/index.js",
+  "license": "ISC",
+  "keywords": [
+    "next-auth",
+    "next.js",
+    "oauth",
+    "drizzle",
+    "drizzle-orm"
+  ],
+  "private": false,
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "clean": "rm ./prisma/dev.db* || echo 'File deleted'",
+    "init:default": "prisma migrate dev --name init --skip-seed",
+    "test:default": "pnpm init:default && jest",
+    "test": "pnpm test:default",
+    "build": "prisma generate && tsc",
+    "dev": "prisma generate && tsc -w",
+    "studio": "prisma studio"
+  },
+  "files": [
+    "README.md",
+    "dist"
+  ],
+  "peerDependencies": {
+    "@paralleldrive/cuid2": ">= 2.2.0, < 3.0.0",
+    "drizzle-orm": ">=0.22.0",
+    "next-auth": "^4"
+  },
+  "devDependencies": {
+    "@next-auth/adapter-test": "workspace:*",
+    "@next-auth/tsconfig": "workspace:*",
+    "@paralleldrive/cuid2": ">= 2.2.0, < 3.0.0",
+    "@prisma/client": "^3.10.0",
+    "jest": "^27.4.3",
+    "next-auth": "workspace:*",
+    "drizzle-orm": ">=0.22.0",
+    "drizzle-kit": ">=0.17.0"
+  },
+  "jest": {
+    "preset": "@next-auth/adapter-test/jest"
+  }
+}
